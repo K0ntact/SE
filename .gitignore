@@ -1,0 +1,17 @@
+archives
+
+docs
+src.demo
+src.exercise
+
+out/
+.idea
+
+*.zip
+SE.iml
+*.class
+test.java
+# Eclipse stuff
+.project
+.classpath
+.settings
