@@ -5,11 +5,11 @@ import utils.OptType;
 public class Student implements Comparable<Student>{
     @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 1, max = 10e9)
     private Integer id;
-    @DomainConstraint(type = "String", mutable = true, optional = false, length = 50)
+    @DomainConstraint(type = "String", optional = false, length = 50)
     private String name;
-    @DomainConstraint(type = "String", mutable = true, optional = false, length = 10)
+    @DomainConstraint(type = "String", optional = false, length = 10)
     private String phoneNumber;
-    @DomainConstraint(type = "String", mutable = true, optional = false, length = 100)
+    @DomainConstraint(type = "String", optional = false, length = 100)
     private String address;
 
     public Student(Integer id, String name, String phoneNumber, String address) {
@@ -19,31 +19,23 @@ public class Student implements Comparable<Student>{
         this.address = validateAddress(address);
     }
 
-    public Integer getId() {
-        return id;
-    }
-    public String getAddress() {
-        return address;
-    }
-    public String getName() {
-        return name;
-    }
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+    @DOpt(type = OptType.Observer)
+    public Integer getId() {return id;}
+    @DOpt(type = OptType.Observer)
+    public String getAddress() {return address;}
+    @DOpt(type = OptType.Observer)
+    public String getName() {return name;}
+    @DOpt(type = OptType.Observer)
+    public String getPhoneNumber() {return phoneNumber;}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @DOpt(type = OptType.Mutator)
+    public void setAddress(String address) {this.address = address;}
+    @DOpt(type = OptType.Mutator)
+    public void setName(String name) {this.name = name;}
+    @DOpt(type = OptType.Mutator)
+    public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
+    @DOpt(type = OptType.Mutator)
+    public void setId(Integer id) {this.id = id;}
 
     @Override
     public int compareTo(Student std) {

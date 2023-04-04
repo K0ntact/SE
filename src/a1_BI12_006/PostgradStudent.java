@@ -7,7 +7,7 @@ import utils.OptType;
 public class PostgradStudent extends Student{
     @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 10e8 + 1, max = 10e9)
     private Integer id;
-    @DomainConstraint(type = "Float", mutable = true, optional = false, min = 0.0f, max = 4.0f)
+    @DomainConstraint(type = "Float", optional = false, min = 0.0f, max = 4.0f)
     private float gpa;
 
     public PostgradStudent(Integer id, String name, String phoneNumber, String address, float gpa) {
