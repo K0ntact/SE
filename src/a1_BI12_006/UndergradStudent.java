@@ -13,13 +13,11 @@ public class UndergradStudent extends Student{
         this.id = validateId(id);
     }
 
-    public Integer getId() {
-        return id;
-    }
+    @DOpt(type = OptType.Observer)
+    public Integer getId() {return id;}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @DOpt(type = OptType.Mutator)
+    public void setId(Integer id) {this.id = id;}
 
     @Override
     @DOpt(type = OptType.Helper)

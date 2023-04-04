@@ -16,21 +16,15 @@ public class PostgradStudent extends Student{
         this.gpa = validateGpa(gpa);
     }
 
-    public float getGpa() {
-        return gpa;
-    }
+    @DOpt(type = OptType.Observer)
+    public float getGpa() {return gpa;}
+    @DOpt(type = OptType.Observer)
+    public Integer getId() {return id;}
 
-    public void setGpa(float gpa) {
-        this.gpa = gpa;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @DOpt(type = OptType.Mutator)
+    public void setGpa(float gpa) {this.gpa = gpa;}
+    @DOpt(type = OptType.Mutator)
+    public void setId(Integer id) {this.id = id;}
 
     @Override
     @DOpt(type = OptType.Helper)

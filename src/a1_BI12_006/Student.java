@@ -6,11 +6,11 @@ public class Student implements Comparable<Student>{
     @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 1, max = 10e9)
     private Integer id;
     @DomainConstraint(type = "String", optional = false, length = 50)
-    private String name;
+    protected String name;
     @DomainConstraint(type = "String", optional = false, length = 10)
-    private String phoneNumber;
+    protected String phoneNumber;
     @DomainConstraint(type = "String", optional = false, length = 100)
-    private String address;
+    protected String address;
 
     public Student(Integer id, String name, String phoneNumber, String address) {
         this.id = validateId(id);
