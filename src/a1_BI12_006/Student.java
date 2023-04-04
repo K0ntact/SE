@@ -84,6 +84,7 @@ public class Student implements Comparable<Student>{
     }
 
     @Override
+    @DOpt(type = OptType.Other)
     public int compareTo(Student std) {
         return this.name.compareTo(std.name);
     }
