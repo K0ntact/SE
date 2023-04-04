@@ -8,29 +8,30 @@ public class UndergradStudent extends Student{
     @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 10e5, max = 10e8)
     private Integer id;
 
-    public UndergradStudent(Integer id, String name, String phoneNumber, String address) {
-        super(id, name, phoneNumber, address);
-        this.id = validateId(id);
+    public UndergradStudent() {
+        super();
+        this.id = 0;
     }
 
     @DOpt(type = OptType.Observer)
     public Integer getId() {return id;}
 
     @DOpt(type = OptType.Mutator)
-    public void setId(Integer id) {this.id = id;}
+    public void setId(Integer id) {
+        try {
+            if (!validateId(id)) {
+                throw new Exception("Invalid id");
+            } else {
+                this.id = id;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     @Override
     @DOpt(type = OptType.Helper)
-    protected Integer validateId(Integer id) {
-        while (true) {
-            try {
-                if (id < 10e5 || id > 10e8) {
-                    throw new Exception("Invalid id");
-                }
-                return id;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
+    protected boolean validateId(Integer id) {
+        return (id >= Math.pow(10, 5) && id <= Math.pow(10, 8));
     }
 }

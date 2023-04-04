@@ -1,6 +1,7 @@
 package a1_BI12_006;
 import utils.*;
 import utils.OptType;
+import java.lang.Math;
 
 public class Student implements Comparable<Student>{
     @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 1, max = 10e9)
@@ -12,13 +13,14 @@ public class Student implements Comparable<Student>{
     @DomainConstraint(type = "String", optional = false, length = 100)
     protected String address;
 
-    public Student(Integer id, String name, String phoneNumber, String address) {
-        this.id = validateId(id);
-        this.name = validateName(name);
-        this.phoneNumber = validatePhoneNumber(phoneNumber);
-        this.address = validateAddress(address);
+    public Student() {
+        this.id = 0;
+        this.name = "";
+        this.phoneNumber = "";
+        this.address = "";
     }
 
+    // Getters
     @DOpt(type = OptType.Observer)
     public Integer getId() {return id;}
     @DOpt(type = OptType.Observer)
@@ -28,81 +30,82 @@ public class Student implements Comparable<Student>{
     @DOpt(type = OptType.Observer)
     public String getPhoneNumber() {return phoneNumber;}
 
+    // Setters
     @DOpt(type = OptType.Mutator)
-    public void setAddress(String address) {this.address = address;}
+    public void setId(Integer id) {
+        try {
+            if (!validateId(id)) {
+                throw new Exception("Invalid id");
+            } else {
+                this.id = id;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     @DOpt(type = OptType.Mutator)
-    public void setName(String name) {this.name = name;}
+    public void setName(String name) {
+        try {
+            if (!validateName(name)) {
+                throw new Exception("Invalid name");
+            } else {
+                this.name = name;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     @DOpt(type = OptType.Mutator)
-    public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
+    public void setPhoneNumber(String phoneNumber) {
+        try {
+            if (!validatePhoneNumber(phoneNumber)) {
+                throw new Exception("Invalid phone number");
+            } else {
+                this.phoneNumber = phoneNumber;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     @DOpt(type = OptType.Mutator)
-    public void setId(Integer id) {this.id = id;}
+    public void setAddress(String address) {
+        try {
+            if (!validateAddress(address)) {
+                throw new Exception("Invalid address");
+            } else {
+                this.address = address;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     @Override
     public int compareTo(Student std) {
         return this.name.compareTo(std.name);
     }
 
+    // Helper methods
     @DOpt(type = OptType.Helper)
-    protected Integer validateId(Integer id) {
-        while (true) {
-            try {
-                if (id < 1 || id > Math.pow(10, 9)) {
-                    throw new Exception("Invalid id");
-                }
-                return id;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                System.out.println("Please enter a valid id: ");
-                id = Integer.parseInt(System.console().readLine());
-            }
-        }
+    protected boolean validateId(Integer id) {
+        return (id >= 1 && id <= Math.pow(10, 9));
     }
 
     @DOpt(type = OptType.Helper)
-    protected String validateName(String name) {
-        while (true) {
-            try {
-                if (name.length() > 50) {
-                    throw new Exception("Invalid name");
-                }
-                return name;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                System.out.println("Please enter a valid name: ");
-                name = System.console().readLine();
-            }
-        }
+    protected boolean validateName(String name) {
+        return name.length() <= 50;
     }
 
     @DOpt(type = OptType.Helper)
-    protected String validatePhoneNumber(String phoneNumber) {
-        while (true) {
-            try {
-                if (phoneNumber.length() > 10) {
-                    throw new Exception("Invalid phone number");
-                }
-                return phoneNumber;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                System.out.println("Please enter a valid phone number: ");
-                phoneNumber = System.console().readLine();
-            }
-        }
+    protected boolean validatePhoneNumber(String phoneNumber) {
+        return phoneNumber.length() <= 10;
     }
 
     @DOpt(type = OptType.Helper)
-    protected String validateAddress(String address) {
-        while (true) {
-            try {
-                if (address.length() > 100) {
-                    throw new Exception("Invalid address");
-                }
-                return address;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                System.out.println("Please enter a valid address: ");
-                address = System.console().readLine();
-            }
-        }
+    protected boolean validateAddress(String address) {
+        return address.length() <= 100;
     }
 }
