@@ -32,8 +32,9 @@ public class PostgradStudent extends Student{
         this.id = id;
     }
 
+    @Override
     @DOpt(type = OptType.Helper)
-    private Integer validateId(Integer id) {
+    protected Integer validateId(Integer id) {
         while (true) {
             try {
                 if (id < 10e8 + 1 || id > Math.pow(10, 9)) {
@@ -47,7 +48,7 @@ public class PostgradStudent extends Student{
     }
 
     @DOpt(type = OptType.Helper)
-    public Float validateGpa(Float gpa) {
+    protected Float validateGpa(Float gpa) {
         while (true) {
             try {
                 if (gpa < 0.0f || gpa > 4.0f) {

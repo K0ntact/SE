@@ -43,7 +43,7 @@ public class Student implements Comparable<Student>{
     }
 
     @DOpt(type = OptType.Helper)
-    private Integer validateId(Integer id) {
+    protected Integer validateId(Integer id) {
         while (true) {
             try {
                 if (id < 1 || id > Math.pow(10, 9)) {
@@ -59,7 +59,7 @@ public class Student implements Comparable<Student>{
     }
 
     @DOpt(type = OptType.Helper)
-    private String validateName(String name) {
+    protected String validateName(String name) {
         while (true) {
             try {
                 if (name.length() > 50) {
@@ -75,7 +75,7 @@ public class Student implements Comparable<Student>{
     }
 
     @DOpt(type = OptType.Helper)
-    private String validatePhoneNumber(String phoneNumber) {
+    protected String validatePhoneNumber(String phoneNumber) {
         while (true) {
             try {
                 if (phoneNumber.length() > 10) {
@@ -91,7 +91,7 @@ public class Student implements Comparable<Student>{
     }
 
     @DOpt(type = OptType.Helper)
-    private String validateAddress(String address) {
+    protected String validateAddress(String address) {
         while (true) {
             try {
                 if (address.length() > 100) {

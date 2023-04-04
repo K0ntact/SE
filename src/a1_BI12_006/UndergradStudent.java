@@ -21,8 +21,9 @@ public class UndergradStudent extends Student{
         this.id = id;
     }
 
+    @Override
     @DOpt(type = OptType.Helper)
-    private Integer validateId(Integer id) {
+    protected Integer validateId(Integer id) {
         while (true) {
             try {
                 if (id < 10e5 || id > 10e8) {
