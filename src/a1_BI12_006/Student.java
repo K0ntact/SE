@@ -7,11 +7,11 @@ public class Student implements Comparable<Student>{
     @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 1, max = 10e9)
     private Integer id;
     @DomainConstraint(type = "String", optional = false, length = 50)
-    protected String name;
+    private String name;
     @DomainConstraint(type = "String", optional = false, length = 10)
-    protected String phoneNumber;
+    private String phoneNumber;
     @DomainConstraint(type = "String", optional = false, length = 100)
-    protected String address;
+    private String address;
 
     public Student() {
         this.id = 0;
