@@ -3,15 +3,53 @@ import utils.*;
 import utils.OptType;
 import java.lang.Math;
 
+/**
+ * @overview Represents a student
+ *
+ * @attributes
+ * id          Integer
+ * name        String
+ * phoneNumber String
+ * address     String
+ *
+ * @object A typical student is <id, name, phoneNumber, address>
+ *
+ * @abstract_properties
+ * mutable(id) = false /\ optional(id) = false /\ min(id) = 1 /\ max(id) = 10e9 /\
+ * mutable(name) = true /\ optional(name) = false /\ length(name) = 50 /\
+ * mutable(phoneNumber) = true /\ optional(phoneNumber) = false /\ length(phoneNumber) = 10 /\
+ * mutable(address) = true /\ optional(address) = false /\ length(address) = 100
+ */
+
 public class Student implements Comparable<Student>{
     @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 1, max = 10e9)
     private Integer id;
     @DomainConstraint(type = "String", optional = false, length = 50)
-    private String name;
+    protected String name;
     @DomainConstraint(type = "String", optional = false, length = 10)
-    private String phoneNumber;
+    protected String phoneNumber;
     @DomainConstraint(type = "String", optional = false, length = 100)
-    private String address;
+    protected String address;
+
+    public Student(Integer id, String name, String phoneNumber, String address) throws NotPossibleException {
+        if (!validateId(id)) {
+            throw new NotPossibleException("Student: Invalid id");
+        }
+        if (!validateName(name)) {
+            throw new NotPossibleException("Student: Invalid name");
+        }
+        if (!validatePhoneNumber(phoneNumber)) {
+            throw new NotPossibleException("Student: Invalid phone number");
+        }
+        if (!validateAddress(address)) {
+            throw new NotPossibleException("Student: Invalid address");
+        }
+
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
 
     public Student() {
         this.id = 0;
@@ -32,54 +70,29 @@ public class Student implements Comparable<Student>{
 
     // Setters
     @DOpt(type = OptType.Mutator)
-    public void setId(Integer id) {
-        try {
-            if (!validateId(id)) {
-                throw new Exception("Invalid id");
-            } else {
-                this.id = id;
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+    public void setName(String name) throws NotPossibleException {
+        if (!validateName(name)) {
+            throw new NotPossibleException("Invalid name");
+        } else {
+            this.name = name;
         }
     }
 
     @DOpt(type = OptType.Mutator)
-    public void setName(String name) {
-        try {
-            if (!validateName(name)) {
-                throw new Exception("Invalid name");
-            } else {
-                this.name = name;
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+    public void setPhoneNumber(String phoneNumber) throws NotPossibleException {
+        if (!validatePhoneNumber(phoneNumber)) {
+            throw new NotPossibleException("Invalid phone number");
+        } else {
+            this.phoneNumber = phoneNumber;
         }
     }
 
     @DOpt(type = OptType.Mutator)
-    public void setPhoneNumber(String phoneNumber) {
-        try {
-            if (!validatePhoneNumber(phoneNumber)) {
-                throw new Exception("Invalid phone number");
-            } else {
-                this.phoneNumber = phoneNumber;
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    @DOpt(type = OptType.Mutator)
-    public void setAddress(String address) {
-        try {
-            if (!validateAddress(address)) {
-                throw new Exception("Invalid address");
-            } else {
-                this.address = address;
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+    public void setAddress(String address) throws NotPossibleException {
+        if (!validateAddress(address)) {
+            throw new NotPossibleException("Invalid address");
+        } else {
+            this.address = address;
         }
     }
 
