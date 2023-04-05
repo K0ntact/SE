@@ -31,7 +31,10 @@ public class Student implements Comparable<Student>{
     @DomainConstraint(type = "String", optional = false, length = 100)
     protected String address;
 
-    public Student(Integer id, String name, String phoneNumber, String address) throws NotPossibleException {
+    public Student(@AttrRef("id") Integer id,
+                   @AttrRef("name") String name,
+                   @AttrRef("phoneNumber") String phoneNumber,
+                   @AttrRef("address") String address) throws NotPossibleException {
         if (!validateId(id)) {
             throw new NotPossibleException("Student: Invalid id");
         }
@@ -51,6 +54,12 @@ public class Student implements Comparable<Student>{
         this.address = address;
     }
 
+    /**
+     * Default constructor for init other subclasses, since they have different "id" attribute.
+     * When subclass is initializing, it will check the given parameters first then set the attributes.
+     * Hence, we cannot use the other constructor to initialize the attributes, because we have to check the parameters first.
+     * So a default constructor is needed.
+     */
     public Student() {
         this.id = 0;
         this.name = "";
@@ -59,17 +68,17 @@ public class Student implements Comparable<Student>{
     }
 
     // Getters
-    @DOpt(type = OptType.Observer)
+    @DOpt(type = OptType.Observer)  @AttrRef("id")
     public Integer getId() {return id;}
-    @DOpt(type = OptType.Observer)
+    @DOpt(type = OptType.Observer)  @AttrRef("address")
     public String getAddress() {return address;}
-    @DOpt(type = OptType.Observer)
+    @DOpt(type = OptType.Observer)  @AttrRef("name")
     public String getName() {return name;}
-    @DOpt(type = OptType.Observer)
+    @DOpt(type = OptType.Observer)  @AttrRef("phoneNumber")
     public String getPhoneNumber() {return phoneNumber;}
 
     // Setters
-    @DOpt(type = OptType.Mutator)
+    @DOpt(type = OptType.Mutator)   @AttrRef("name")
     public void setName(String name) throws NotPossibleException {
         if (!validateName(name)) {
             throw new NotPossibleException("Invalid name");
@@ -78,7 +87,7 @@ public class Student implements Comparable<Student>{
         }
     }
 
-    @DOpt(type = OptType.Mutator)
+    @DOpt(type = OptType.Mutator)   @AttrRef("phoneNumber")
     public void setPhoneNumber(String phoneNumber) throws NotPossibleException {
         if (!validatePhoneNumber(phoneNumber)) {
             throw new NotPossibleException("Invalid phone number");
@@ -87,7 +96,7 @@ public class Student implements Comparable<Student>{
         }
     }
 
-    @DOpt(type = OptType.Mutator)
+    @DOpt(type = OptType.Mutator)   @AttrRef("address")
     public void setAddress(String address) throws NotPossibleException {
         if (!validateAddress(address)) {
             throw new NotPossibleException("Invalid address");
@@ -104,7 +113,7 @@ public class Student implements Comparable<Student>{
 
     // Helper methods
     @DOpt(type = OptType.Helper)
-    protected boolean validateId(Integer id) {
+    private boolean validateId(Integer id) {    // private method because each class has its own "id" which has different domain constraints
         return (id >= 1 && id <= Math.pow(10, 9));
     }
 

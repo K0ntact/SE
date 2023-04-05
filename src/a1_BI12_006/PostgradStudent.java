@@ -1,9 +1,7 @@
 package a1_BI12_006;
 
-import utils.DOpt;
-import utils.DomainConstraint;
-import utils.NotPossibleException;
-import utils.OptType;
+import utils.*;
+
 import java.lang.Math;
 
 /**
@@ -32,7 +30,11 @@ public class PostgradStudent extends Student{
     @DomainConstraint(type = "Float", optional = false, min = 0.0f, max = 4.0f)
     private float gpa;
 
-    public PostgradStudent(Integer id, String name, String phoneNumber, String address, float gpa) throws NotPossibleException {
+    public PostgradStudent(@AttrRef("id") Integer id,
+                           @AttrRef("name") String name,
+                           @AttrRef("phoneNumber") String phoneNumber,
+                           @AttrRef("address") String address,
+                           @AttrRef("gpa") Float gpa) throws NotPossibleException {
         if (!validateId(id)) {
             throw new NotPossibleException("PostgradStudent: Invalid id");
         }
@@ -57,13 +59,13 @@ public class PostgradStudent extends Student{
     }
 
     // Getters
-    @DOpt(type = OptType.Observer)
+    @DOpt(type = OptType.Observer)  @AttrRef("gpa")
     public float getGpa() {return gpa;}
-    @DOpt(type = OptType.Observer)
+    @DOpt(type = OptType.Observer)  @AttrRef("id")
     public Integer getId() {return id;}
 
     // Setters
-    @DOpt(type = OptType.Mutator)
+    @DOpt(type = OptType.Mutator)   @AttrRef("gpa")
     public void setGpa(float gpa) {
         try {
             if (!validateGpa(gpa)) {
@@ -77,9 +79,8 @@ public class PostgradStudent extends Student{
     }
 
     // Helper methods
-    @Override
     @DOpt(type = OptType.Helper)
-    protected boolean validateId(Integer id) {
+    private boolean validateId(Integer id) {
         return (id >= Math.pow(10, 8) + 1 && id <= Math.pow(10, 9));
     }
 

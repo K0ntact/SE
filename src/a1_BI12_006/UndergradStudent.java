@@ -1,9 +1,6 @@
 package a1_BI12_006;
 
-import utils.DOpt;
-import utils.DomainConstraint;
-import utils.NotPossibleException;
-import utils.OptType;
+import utils.*;
 
 /**
  * @overview Represents an undergraduate student, a subclass of Student
@@ -27,7 +24,10 @@ public class UndergradStudent extends Student{
     @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 10e5, max = 10e8)
     private Integer id;
 
-    public UndergradStudent(Integer id, String name, String phoneNumber, String address) throws NotPossibleException {
+    public UndergradStudent(@AttrRef("id") Integer id,
+                            @AttrRef("name") String name,
+                            @AttrRef("phoneNumber") String phoneNumber,
+                            @AttrRef("address") String address) throws NotPossibleException {
         if (!validateId(id)) {
             throw new NotPossibleException("UndergradStudent: Invalid id");
         }
@@ -47,12 +47,11 @@ public class UndergradStudent extends Student{
         this.address = address;
     }
 
-    @DOpt(type = OptType.Observer)
+    @DOpt(type = OptType.Observer)  @AttrRef("id")
     public Integer getId() {return id;}
 
-    @Override
     @DOpt(type = OptType.Helper)
-    protected boolean validateId(Integer id) {
+    private boolean validateId(Integer id) {
         return (id >= Math.pow(10, 5) && id <= Math.pow(10, 8));
     }
 }
