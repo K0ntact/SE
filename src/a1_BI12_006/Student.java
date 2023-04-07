@@ -7,18 +7,28 @@ import java.lang.Math;
  * @overview Represents a student
  *
  * @attributes
- * id          Integer
- * name        String
- * phoneNumber String
- * address     String
+ * <table>
+ *     <tr>
+ *         <td>id</td> <td>Integer</td>
+ *     </tr>
+ *     <tr>
+ *         <td>name</td> <td>String</td>
+ *     </tr>
+ *     <tr>
+ *         <td>phoneNumber</td> <td>String</td>
+ *     </tr>
+ *     <tr>
+ *         <td>address</td> <td>String</td>
+ *     </tr>
+ * </table>
  *
- * @object A typical student is <id, name, phoneNumber, address>
+ * @object A typical student is < id, name, phoneNumber, address >
  *
  * @abstract_properties
- * mutable(id) = false /\ optional(id) = false /\ min(id) = 1 /\ max(id) = 10e9 /\
- * mutable(name) = true /\ optional(name) = false /\ length(name) = 50 /\
- * mutable(phoneNumber) = true /\ optional(phoneNumber) = false /\ length(phoneNumber) = 10 /\
- * mutable(address) = true /\ optional(address) = false /\ length(address) = 100
+ * mutable(id) = false | optional(id) = false | min(id) = 1 | max(id) = 10e9<br>
+ * mutable(name) = true | optional(name) = false | length(name) = 50<br>
+ * mutable(phoneNumber) = true | optional(phoneNumber) = false | length(phoneNumber) = 10<br>
+ * mutable(address) = true | optional(address) = false | length(address) = 100<br>
  */
 
 public class Student implements Comparable<Student>{
@@ -113,7 +123,7 @@ public class Student implements Comparable<Student>{
 
     // Helper methods
     @DOpt(type = OptType.Helper)
-    private boolean validateId(Integer id) {    // private method because each class has its own "id" which has different domain constraints
+    protected boolean validateId(Integer id) {    // private method because each class has its own "id" which has different domain constraints
         return (id >= 1 && id <= Math.pow(10, 9));
     }
 

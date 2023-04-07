@@ -79,8 +79,9 @@ public class PostgradStudent extends Student{
     }
 
     // Helper methods
+    @Override
     @DOpt(type = OptType.Helper)
-    private boolean validateId(Integer id) {
+    protected boolean validateId(Integer id) {
         return (id >= Math.pow(10, 8) + 1 && id <= Math.pow(10, 9));
     }
 

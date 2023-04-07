@@ -28,6 +28,10 @@ public class UndergradStudent extends Student{
                             @AttrRef("name") String name,
                             @AttrRef("phoneNumber") String phoneNumber,
                             @AttrRef("address") String address) throws NotPossibleException {
+        if(!super.validateId(id)) {
+            throw new NotPossibleException("Student: Invalid id");
+        }
+
         if (!validateId(id)) {
             throw new NotPossibleException("UndergradStudent: Invalid id");
         }
@@ -50,8 +54,9 @@ public class UndergradStudent extends Student{
     @DOpt(type = OptType.Observer)  @AttrRef("id")
     public Integer getId() {return id;}
 
+    @Override
     @DOpt(type = OptType.Helper)
-    private boolean validateId(Integer id) {
+    protected boolean validateId(Integer id) {
         return (id >= Math.pow(10, 5) && id <= Math.pow(10, 8));
     }
 }
