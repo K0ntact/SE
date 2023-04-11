@@ -3,26 +3,17 @@ import utils.*;
 import java.lang.Math;
 
 /**
- * @overview Represents a postgraduate student, a type of student
+ * @overview Represents a postgraduate student, a subclass of Student
  *
  * @attributes
- * <table>
- *     <tr>
- *         <td>id</td> <td>Integer</td>
- *     </tr>
- *     <tr>
- *         <td>name</td> <td>String</td>
- *     </tr>
- *     <tr>
- *         <td>phoneNumber</td> <td>String</td>
- *     </tr>
- *     <tr>
- *         <td>address</td> <td>String</td>
- *     </tr>
- *     <tr>
- *         <td>gpa</td> <td>Float</td>
- *     </tr>
- * </table>
+ * <br>
+ * <pre>
+ *     id           Integer
+ *     name         String
+ *     phoneNumber  String
+ *     address      String
+ *     gpa          Float
+ * </pre>
  *
  * @object A typical postgraduate student is <id, name, phoneNumber, address, gpa>
  *

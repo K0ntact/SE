@@ -5,20 +5,13 @@ import utils.*;
  * @overview Represents an undergraduate student, a subclass of Student
  *
  * @attributes
- * <table>
- *     <tr>
- *         <td>id</td> <td>Integer</td>
- *     </tr>
- *     <tr>
- *         <td>name</td> <td>String</td>
- *     </tr>
- *     <tr>
- *         <td>phoneNumber</td> <td>String</td>
- *     </tr>
- *     <tr>
- *         <td>address</td> <td>String</td>
- *     </tr>
- * </table>
+ * <br>
+ * <pre>
+ *     id           Integer
+ *     name         String
+ *     phoneNumber  String
+ *     address      String
+ * </pre>
  *
  * @object A typical undergraduate student is <id, name, phoneNumber, address>
  *
