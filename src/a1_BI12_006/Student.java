@@ -1,6 +1,5 @@
 package a1_BI12_006;
 import utils.*;
-import utils.OptType;
 import java.lang.Math;
 
 /**
