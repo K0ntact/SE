@@ -6,24 +6,36 @@ import java.lang.Math;
  * @overview Represents a postgraduate student, a type of student
  *
  * @attributes
- * id          Integer
- * name        String
- * phoneNumber String
- * address     String
- * gpa         Float
+ * <table>
+ *     <tr>
+ *         <td>id</td> <td>Integer</td>
+ *     </tr>
+ *     <tr>
+ *         <td>name</td> <td>String</td>
+ *     </tr>
+ *     <tr>
+ *         <td>phoneNumber</td> <td>String</td>
+ *     </tr>
+ *     <tr>
+ *         <td>address</td> <td>String</td>
+ *     </tr>
+ *     <tr>
+ *         <td>gpa</td> <td>Float</td>
+ *     </tr>
+ * </table>
  *
  * @object A typical postgraduate student is <id, name, phoneNumber, address, gpa>
  *
  * @abstract_properties
- * mutable(id) = false /\ optional(id) = false /\ min(id) = 10e8 + 1 /\ max(id) = 10e9 /\
- * mutable(name) = true /\ optional(name) = false /\ length(name) = 50 /\
- * mutable(phoneNumber) = true /\ optional(phoneNumber) = false /\ length(phoneNumber) = 10 /\
- * mutable(address) = true /\ optional(address) = false /\ length(address) = 100 /\
- * mutable(gpa) = true /\ optional(gpa) = false /\ min(gpa) = 0.0 /\ max(gpa) = 4.0
+ * mutable(id) = false | optional(id) = false | min(id) = 1e8 + 1 | max(id) = 1e9<br>
+ * mutable(name) = true | optional(name) = false | length(name) = 50<br>
+ * mutable(phoneNumber) = true | optional(phoneNumber) = false | length(phoneNumber) = 10<br>
+ * mutable(address) = true | optional(address) = false | length(address) = 100<br>
+ * mutable(gpa) = true | optional(gpa) = false | min(gpa) = 0.0 | max(gpa) = 4.0<br>
  */
 
 public class PostgradStudent extends Student{
-    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 10e8 + 1, max = 10e9)
+    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 1e8 + 1, max = 1e9)
     private Integer id;
     @DomainConstraint(type = "Float", optional = false, min = 0.0f, max = 4.0f)
     private float gpa;

@@ -5,22 +5,32 @@ import utils.*;
  * @overview Represents an undergraduate student, a subclass of Student
  *
  * @attributes
- * id          Integer
- * name        String
- * phoneNumber String
- * address     String
+ * <table>
+ *     <tr>
+ *         <td>id</td> <td>Integer</td>
+ *     </tr>
+ *     <tr>
+ *         <td>name</td> <td>String</td>
+ *     </tr>
+ *     <tr>
+ *         <td>phoneNumber</td> <td>String</td>
+ *     </tr>
+ *     <tr>
+ *         <td>address</td> <td>String</td>
+ *     </tr>
+ * </table>
  *
  * @object A typical undergraduate student is <id, name, phoneNumber, address>
  *
  * @abstract_properties
- * mutable(id) = false /\ optional(id) = false /\ min(id) = 10e5 /\ max(id) = 10e8 /\
- * mutable(name) = true /\ optional(name) = false /\ length(name) = 50 /\
- * mutable(phoneNumber) = true /\ optional(phoneNumber) = false /\ length(phoneNumber) = 10 /\
- * mutable(address) = true /\ optional(address) = false /\ length(address) = 100
+ * mutable(id) = false | optional(id) = false | min(id) = 1e5 | max(id) = 1e8<br>
+ * mutable(name) = true | optional(name) = false | length(name) = 50<br>
+ * mutable(phoneNumber) = true | optional(phoneNumber) = false | length(phoneNumber) = 10<br>
+ * mutable(address) = true | optional(address) = false | length(address) = 100<br>
  */
 
 public class UndergradStudent extends Student{
-    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 10e5, max = 10e8)
+    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 1e5, max = 1e8)
     private Integer id;
 
     public UndergradStudent(@AttrRef("id") Integer id,

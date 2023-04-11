@@ -24,14 +24,14 @@ import java.lang.Math;
  * @object A typical student is < id, name, phoneNumber, address >
  *
  * @abstract_properties
- * mutable(id) = false | optional(id) = false | min(id) = 1 | max(id) = 10e9<br>
+ * mutable(id) = false | optional(id) = false | min(id) = 1 | max(id) = 1e9<br>
  * mutable(name) = true | optional(name) = false | length(name) = 50<br>
  * mutable(phoneNumber) = true | optional(phoneNumber) = false | length(phoneNumber) = 10<br>
  * mutable(address) = true | optional(address) = false | length(address) = 100<br>
  */
 
 public class Student implements Comparable<Student>{
-    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 1, max = 10e9)
+    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 1, max = 1e9)
     private Integer id;
     @DomainConstraint(type = "String", optional = false, length = 50)
     protected String name;
