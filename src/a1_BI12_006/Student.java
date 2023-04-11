@@ -122,7 +122,7 @@ public class Student implements Comparable<Student>{
 
     // Helper methods
     @DOpt(type = OptType.Helper)
-    protected boolean validateId(Integer id) {    // private method because each class has its own "id" which has different domain constraints
+    protected boolean validateId(Integer id) {
         return (id >= 1 && id <= Math.pow(10, 9));
     }
 
