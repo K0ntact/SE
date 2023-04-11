@@ -24,13 +24,19 @@ import java.lang.Math;
  */
 
 public class Student implements Comparable<Student>{
-    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 1, max = 1e9)
+    private static final int S_MIN_ID = 1;
+    private static final int S_MAX_ID = (int) 1e9;
+    private static final int S_MAX_NAME_LENGTH = 50;
+    private static final int S_MAX_PHONE_NUMBER_LENGTH = 10;
+    private static final int S_MAX_ADDRESS_LENGTH = 100;
+
+    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = S_MIN_ID, max = S_MAX_ID)
     private Integer id;
-    @DomainConstraint(type = "String", optional = false, length = 50)
+    @DomainConstraint(type = "String", optional = false, length = S_MAX_NAME_LENGTH)
     protected String name;
-    @DomainConstraint(type = "String", optional = false, length = 10)
+    @DomainConstraint(type = "String", optional = false, length = S_MAX_PHONE_NUMBER_LENGTH)
     protected String phoneNumber;
-    @DomainConstraint(type = "String", optional = false, length = 100)
+    @DomainConstraint(type = "String", optional = false, length = S_MAX_ADDRESS_LENGTH)
     protected String address;
 
     public Student(@AttrRef("id") Integer id,
@@ -116,21 +122,21 @@ public class Student implements Comparable<Student>{
     // Helper methods
     @DOpt(type = OptType.Helper)
     protected boolean validateId(Integer id) {
-        return (id >= 1 && id <= Math.pow(10, 9));
+        return (id >= S_MIN_ID && id <= S_MAX_ID);
     }
 
     @DOpt(type = OptType.Helper)
     protected boolean validateName(String name) {
-        return name.length() <= 50;
+        return name.length() <= S_MAX_NAME_LENGTH;
     }
 
     @DOpt(type = OptType.Helper)
     protected boolean validatePhoneNumber(String phoneNumber) {
-        return phoneNumber.length() <= 10;
+        return phoneNumber.length() <= S_MAX_PHONE_NUMBER_LENGTH;
     }
 
     @DOpt(type = OptType.Helper)
     protected boolean validateAddress(String address) {
-        return address.length() <= 100;
+        return address.length() <= S_MAX_ADDRESS_LENGTH;
     }
 }

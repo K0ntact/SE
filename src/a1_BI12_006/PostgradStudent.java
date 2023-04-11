@@ -26,9 +26,15 @@ import java.lang.Math;
  */
 
 public class PostgradStudent extends Student{
-    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 1e8 + 1, max = 1e9)
+    private static final int PgS_MIN_ID = (int) (1e8 + 1);
+    private static final int PgS_MAX_ID = (int) 1e9;
+    private static final float MIN_GPA = 0.0f;
+    private static final float MAX_GPA = 4.0f;
+
+
+    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = PgS_MIN_ID, max = PgS_MAX_ID)
     private Integer id;
-    @DomainConstraint(type = "Float", optional = false, min = 0.0f, max = 4.0f)
+    @DomainConstraint(type = "Float", optional = false, min = MIN_GPA, max = MAX_GPA)
     private float gpa;
 
     public PostgradStudent(@AttrRef("id") Integer id,
@@ -83,11 +89,11 @@ public class PostgradStudent extends Student{
     @Override
     @DOpt(type = OptType.Helper)
     protected boolean validateId(Integer id) {
-        return (id >= Math.pow(10, 8) + 1 && id <= Math.pow(10, 9));
+        return (id >= PgS_MIN_ID && id <= PgS_MAX_ID);
     }
 
     @DOpt(type = OptType.Helper)
     protected boolean validateGpa(Float gpa) {
-        return (gpa >= 0.0f && gpa <= 4.0f);
+        return (gpa >= MIN_GPA && gpa <= MAX_GPA);
     }
 }

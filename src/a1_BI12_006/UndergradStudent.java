@@ -23,7 +23,10 @@ import utils.*;
  */
 
 public class UndergradStudent extends Student{
-    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = 1e5, max = 1e8)
+    private static final int UgS_MIN_ID = (int) 1e5;
+    private static final int UgS_MAX_ID = (int) 1e8;
+
+    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = UgS_MIN_ID, max = UgS_MAX_ID)
     private Integer id;
 
     public UndergradStudent(@AttrRef("id") Integer id,
@@ -59,6 +62,6 @@ public class UndergradStudent extends Student{
     @Override
     @DOpt(type = OptType.Helper)
     protected boolean validateId(Integer id) {
-        return (id >= Math.pow(10, 5) && id <= Math.pow(10, 8));
+        return (id >= UgS_MIN_ID && id <= UgS_MAX_ID);
     }
 }
