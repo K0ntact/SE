@@ -1,9 +1,10 @@
 package a1_BI12_006;
+
 import utils.*;
-import java.lang.Math;
 
 /**
- * @overview Represents a postgraduate student, a subclass of Student
+ * @overview
+ * Represents a postgraduate student, a subclass of Student
  *
  * @attributes
  * <br>
@@ -15,7 +16,8 @@ import java.lang.Math;
  *     gpa          Float
  * </pre>
  *
- * @object A typical postgraduate student is <id, name, phoneNumber, address, gpa>
+ * @object
+ * A typical postgraduate student is <id, name, phoneNumber, address, gpa>
  *
  * @abstract_properties
  * mutable(id) = false | optional(id) = false | min(id) = 1e8 + 1 | max(id) = 1e9<br>
@@ -31,17 +33,25 @@ public class PostgradStudent extends Student{
     private static final float MIN_GPA = 0.0f;
     private static final float MAX_GPA = 4.0f;
 
-
-    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = PgS_MIN_ID, max = PgS_MAX_ID)
-    private Integer id;
     @DomainConstraint(type = "Float", optional = false, min = MIN_GPA, max = MAX_GPA)
     private float gpa;
 
+    /**
+     * Constructor
+     * @effects
+     *  initialise this with < id, name, phoneNumber, address, gpa >
+     * @throws NotPossibleException
+     *  if any of the given parameters is invalid
+     */
     public PostgradStudent(@AttrRef("id") Integer id,
                            @AttrRef("name") String name,
                            @AttrRef("phoneNumber") String phoneNumber,
                            @AttrRef("address") String address,
                            @AttrRef("gpa") Float gpa) throws NotPossibleException {
+        if (!super.validateId(id)) {
+            throw new NotPossibleException("Student: Invalid id");
+        }
+
         if (!validateId(id)) {
             throw new NotPossibleException("PostgradStudent: Invalid id");
         }
@@ -66,34 +76,71 @@ public class PostgradStudent extends Student{
     }
 
     // Getters
+    /**
+     * @effects
+     *  return <tt>this.gpa</tt>
+     */
     @DOpt(type = OptType.Observer)  @AttrRef("gpa")
     public float getGpa() {return gpa;}
-    @DOpt(type = OptType.Observer)  @AttrRef("id")
-    public Integer getId() {return id;}
 
     // Setters
+    /**
+     * @effects
+     * <pre>
+     * if gpa is not valid
+     *     return false
+     * else
+     *     set this.gpa = gpa
+     *     return true
+     * </pre>
+     */
     @DOpt(type = OptType.Mutator)   @AttrRef("gpa")
-    public void setGpa(float gpa) {
-        try {
-            if (!validateGpa(gpa)) {
-                throw new Exception("Invalid gpa");
-            } else {
-                this.gpa = gpa;
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+    public boolean setGpa(float gpa) {
+        if (!validateGpa(gpa)) {
+            return false;
+        } else {
+            this.gpa = gpa;
+            return true;
         }
+    }
+
+    // Default methods
+    @Override
+    public String toString() {
+        return "PostgradStudent{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", gpa=" + gpa +
+                '}';
+    }
+
+    @Override
+    public boolean repOK() {
+        return super.repOK() && validateGpa(gpa);
     }
 
     // Helper methods
     @Override
+    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = PgS_MIN_ID, max = PgS_MAX_ID)
     @DOpt(type = OptType.Helper)
-    protected boolean validateId(Integer id) {
+    protected boolean validateId(int id) {
         return (id >= PgS_MIN_ID && id <= PgS_MAX_ID);
     }
 
+    /**
+     * @param gpa the gpa to set
+     * @effects
+     * <pre>
+     * if gpa is valid
+     *      return true
+     * else
+     *      return false
+     * </pre>
+     */
     @DOpt(type = OptType.Helper)
-    protected boolean validateGpa(Float gpa) {
+    protected boolean validateGpa(float gpa) {
         return (gpa >= MIN_GPA && gpa <= MAX_GPA);
     }
 }

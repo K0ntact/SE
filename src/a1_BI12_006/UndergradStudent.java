@@ -1,8 +1,9 @@
 package a1_BI12_006;
-import utils.*;
 
+import utils.*;
 /**
- * @overview Represents an undergraduate student, a subclass of Student
+ * @overview
+ * Represents an undergraduate student, a subclass of Student
  *
  * @attributes
  * <br>
@@ -13,7 +14,8 @@ import utils.*;
  *     address      String
  * </pre>
  *
- * @object A typical undergraduate student is <id, name, phoneNumber, address>
+ * @object
+ * A typical undergraduate student is <id, name, phoneNumber, address>
  *
  * @abstract_properties
  * mutable(id) = false | optional(id) = false | min(id) = 1e5 | max(id) = 1e8<br>
@@ -26,9 +28,12 @@ public class UndergradStudent extends Student{
     private static final int UgS_MIN_ID = (int) 1e5;
     private static final int UgS_MAX_ID = (int) 1e8;
 
-    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = UgS_MIN_ID, max = UgS_MAX_ID)
-    private Integer id;
-
+    /**
+     * @effects
+     *  initialise this as < id, name, phoneNumber, address >
+     * @throws NotPossibleException
+     *  if any of the preconditions are violated
+     */
     public UndergradStudent(@AttrRef("id") Integer id,
                             @AttrRef("name") String name,
                             @AttrRef("phoneNumber") String phoneNumber,
@@ -56,12 +61,17 @@ public class UndergradStudent extends Student{
         this.address = address;
     }
 
-    @DOpt(type = OptType.Observer)  @AttrRef("id")
-    public Integer getId() {return id;}
-
+    // Default methods
     @Override
+    public String toString() {
+        return "UndergradStudent(" + id + ", " + name + ", " + phoneNumber + ", " + address + ")";
+    }
+
+    // Helper methods
+    @Override
+    @DomainConstraint(type = "Integer", mutable = false, optional = false, min = UgS_MIN_ID, max = UgS_MAX_ID)
     @DOpt(type = OptType.Helper)
-    protected boolean validateId(Integer id) {
+    protected boolean validateId(int id) {
         return (id >= UgS_MIN_ID && id <= UgS_MAX_ID);
     }
 }

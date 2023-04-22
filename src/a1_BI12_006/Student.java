@@ -1,9 +1,10 @@
 package a1_BI12_006;
+
 import utils.*;
-import java.lang.Math;
 
 /**
- * @overview Represents a student
+ * @overview
+ * Represents a student
  *
  * @attributes
  * <br>
@@ -14,7 +15,8 @@ import java.lang.Math;
  *     address      String
  * </pre>
  *
- * @object A typical student is < id, name, phoneNumber, address >
+ * @object
+ * A typical student is < id, name, phoneNumber, address >
  *
  * @abstract_properties
  * mutable(id) = false | optional(id) = false | min(id) = 1 | max(id) = 1e9<br>
@@ -31,7 +33,7 @@ public class Student implements Comparable<Student>{
     private static final int S_MAX_ADDRESS_LENGTH = 100;
 
     @DomainConstraint(type = "Integer", mutable = false, optional = false, min = S_MIN_ID, max = S_MAX_ID)
-    private Integer id;
+    protected int id;
     @DomainConstraint(type = "String", optional = false, length = S_MAX_NAME_LENGTH)
     protected String name;
     @DomainConstraint(type = "String", optional = false, length = S_MAX_PHONE_NUMBER_LENGTH)
@@ -39,6 +41,13 @@ public class Student implements Comparable<Student>{
     @DomainConstraint(type = "String", optional = false, length = S_MAX_ADDRESS_LENGTH)
     protected String address;
 
+    /**
+     * Constructor
+     * @effects
+     *  initialise this with < id, name, phoneNumber, address >
+     * @throws NotPossibleException
+     *  if any of the given parameters is invalid
+     */
     public Student(@AttrRef("id") Integer id,
                    @AttrRef("name") String name,
                    @AttrRef("phoneNumber") String phoneNumber,
@@ -76,67 +85,195 @@ public class Student implements Comparable<Student>{
     }
 
     // Getters
+    /**
+     * @effects
+     *  return <tt>this.id</tt>
+     */
     @DOpt(type = OptType.Observer)  @AttrRef("id")
-    public Integer getId() {return id;}
+    public int getId() {return id;}
+
+    /**
+     * @effects
+     *  return <tt>this.address</tt>
+     */
     @DOpt(type = OptType.Observer)  @AttrRef("address")
     public String getAddress() {return address;}
+
+    /**
+     * @effects
+     *  return <tt>this.name</tt>
+     */
     @DOpt(type = OptType.Observer)  @AttrRef("name")
     public String getName() {return name;}
+
+    /**
+     * @effects
+     *  return <tt>this.phoneNumber</tt>
+     */
     @DOpt(type = OptType.Observer)  @AttrRef("phoneNumber")
     public String getPhoneNumber() {return phoneNumber;}
 
+
     // Setters
+    /**
+     * @effects
+     * <pre>
+     * if id is not valid
+     *      return false
+     * else
+     *      set this.id = id and return true
+     * </pre>
+     */
     @DOpt(type = OptType.Mutator)   @AttrRef("name")
-    public void setName(String name) throws NotPossibleException {
+    public boolean setName(String name) {
         if (!validateName(name)) {
-            throw new NotPossibleException("Invalid name");
+            return false;
         } else {
             this.name = name;
+            return true;
         }
     }
 
+    /**
+     * @effects
+     * <pre>
+     * if phoneNumber is not valid
+     *      return false
+     * else
+     *      set this.phoneNumber = phoneNumber and return true
+     * </pre>
+     */
     @DOpt(type = OptType.Mutator)   @AttrRef("phoneNumber")
-    public void setPhoneNumber(String phoneNumber) throws NotPossibleException {
+    public boolean setPhoneNumber(String phoneNumber) {
         if (!validatePhoneNumber(phoneNumber)) {
-            throw new NotPossibleException("Invalid phone number");
+            return false;
         } else {
             this.phoneNumber = phoneNumber;
+            return true;
         }
     }
 
+    /**
+     * @effects
+     * <pre>
+     * if address is not valid
+     *      return false
+     * else
+     *      set this.address = address and return true
+     * </pre>
+     */
     @DOpt(type = OptType.Mutator)   @AttrRef("address")
-    public void setAddress(String address) throws NotPossibleException {
+    public boolean setAddress(String address) {
         if (!validateAddress(address)) {
-            throw new NotPossibleException("Invalid address");
+            return false;
         } else {
             this.address = address;
+            return true;
         }
     }
 
+
+    // Default methods
+    /**
+     * @param std the object to be compared.
+     * @effects
+     * Compare current Student object with the given Student object by name.
+     */
     @Override
     @DOpt(type = OptType.Other)
     public int compareTo(Student std) {
         return this.name.compareTo(std.getName());
     }
 
+    /**
+     * @effects
+     * <pre>
+     * if this satisfies rep invariant
+     *      return true
+     * else
+     *      return false
+     * </pre>
+     */
+    public boolean repOK() {
+        return validateId(id)
+                && validateName(name)
+                && validatePhoneNumber(phoneNumber)
+                && validateAddress(address);
+    }
+
+    @Override
+    public String toString() {
+        return "Student(" + id + ", " + name + ", " + phoneNumber + ", " + address + ")";
+    }
+
+
     // Helper methods
+    /**
+     * @param id the id to be checked
+     * @effects
+     * <pre>
+     * if id is valid
+     *      return true
+     * else
+     *      return false
+     * </pre>
+     */
     @DOpt(type = OptType.Helper)
-    protected boolean validateId(Integer id) {
+    protected boolean validateId(int id) {
         return (id >= S_MIN_ID && id <= S_MAX_ID);
     }
 
+    /**
+     * @param name the name to be validated
+     * @effects
+     * <pre>
+     * if name is valid
+     *      return true
+     * else
+     *      return false
+     * </pre>
+     */
     @DOpt(type = OptType.Helper)
     protected boolean validateName(String name) {
+        if (name==null || name.length()==0) {
+            return false;
+        }
         return name.length() <= S_MAX_NAME_LENGTH;
     }
 
+    /**
+     * @param phoneNumber the phone number to be validated.
+     * @effects
+     * <pre>
+     * if phoneNumber is valid
+     *      return true
+     * else
+     *      return false
+     * </pre>
+     */
     @DOpt(type = OptType.Helper)
     protected boolean validatePhoneNumber(String phoneNumber) {
+        if (phoneNumber==null || phoneNumber.length()==0) {
+            return false;
+        }
         return phoneNumber.length() <= S_MAX_PHONE_NUMBER_LENGTH;
     }
 
+    /**
+     * @param address the address to be validated.
+     * @effects
+     * <pre>
+     * if address is valid
+     *      return true
+     * else
+     *      return false
+     * </pre>
+     */
     @DOpt(type = OptType.Helper)
     protected boolean validateAddress(String address) {
+        if (address==null || address.length()==0) {
+            return false;
+        }
         return address.length() <= S_MAX_ADDRESS_LENGTH;
     }
 }
