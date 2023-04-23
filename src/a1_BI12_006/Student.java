@@ -48,7 +48,7 @@ public class Student implements Comparable<Student>{
      * @throws NotPossibleException
      *  if any of the given parameters is invalid
      */
-    public Student(@AttrRef("id") Integer id,
+    public Student(@AttrRef("id") int id,
                    @AttrRef("name") String name,
                    @AttrRef("phoneNumber") String phoneNumber,
                    @AttrRef("address") String address) throws NotPossibleException {

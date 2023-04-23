@@ -34,7 +34,7 @@ public class UndergradStudent extends Student{
      * @throws NotPossibleException
      *  if any of the preconditions are violated
      */
-    public UndergradStudent(@AttrRef("id") Integer id,
+    public UndergradStudent(@AttrRef("id") int id,
                             @AttrRef("name") String name,
                             @AttrRef("phoneNumber") String phoneNumber,
                             @AttrRef("address") String address) throws NotPossibleException {

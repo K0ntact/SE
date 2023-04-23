@@ -43,7 +43,7 @@ public class PostgradStudent extends Student{
      * @throws NotPossibleException
      *  if any of the given parameters is invalid
      */
-    public PostgradStudent(@AttrRef("id") Integer id,
+    public PostgradStudent(@AttrRef("id") int id,
                            @AttrRef("name") String name,
                            @AttrRef("phoneNumber") String phoneNumber,
                            @AttrRef("address") String address,
