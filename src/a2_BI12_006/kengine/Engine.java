@@ -43,7 +43,7 @@ public class Engine {
   }
 
   /**
-   * A method to create a <code>Query</code> object containing the matching documents 
+   * A method to create a <code>Query</code> object containing the matching documents
    * of a given keyword <code>w</code>
    * 
    * @param w   a keyword to search
@@ -149,7 +149,34 @@ public class Engine {
     urls.add(u);
     
     return q;
-  }  
+  }
+
+  /**
+   * @effects
+   * if d is null
+   * throws NullPointerException
+   * else
+   * add d to this.tt and this.wt using their respective methods.
+   * If this.q is not null
+   * update this.q to contain any new matching documents.
+   * Return this.q
+   */
+  public Query addDoc(Doc d) throws NotPossibleException {
+    if(d == null){
+      throw new NullPointerException("Engine.addDoc: d is null");
+    }
+    tt.addDoc(d);
+
+    if(this.q != null){
+      q.addDoc(d, wt.addDoc(d));
+    }
+
+    if(this.q == null){
+      q = new Query();
+      q.addDoc(d, wt.addDoc(d));
+    }
+    return q;
+  }
 
   /**
    * @effects 

@@ -50,7 +50,7 @@ public class Query {
   public Query(WordTable wt, String w) {
     // call this to initialise rep
     this();
-    
+
     this.wt = wt;
 
     // look up the key in the word table
@@ -67,14 +67,14 @@ public class Query {
       }
       matches.addAll(docClones);
       keys.add(w);
-      
+
       Sorting.quickSort(matches);
     }
   }
 
   /**
    * A method to add a new keyword to <code>this</code>.
-   * 
+   *
    * @param w
    *          a new keyword to add to this query
    * @modifies <code>this</code>
@@ -179,6 +179,20 @@ public class Query {
         }
       }
     }
+  }
+
+  /**
+   * A method to return an iterator for the matching documents of this query.
+   * 
+   * @effects returns an iterator for the matching documents of this query
+   * @return  an iterator for the matching documents of this query, or null if there are no matches
+   */
+  
+  public Iterator<DocCnt> matchIterator() {
+    if(matches == null) {
+      return null;
+    }
+    return matches.iterator();
   }
 
   /**
