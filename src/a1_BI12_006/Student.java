@@ -180,7 +180,7 @@ public class Student implements Comparable<Student>{
      * Compare current Student object with the given Student object by name.
      */
     @Override
-    @DOpt(type = OptType.Other)
+    @DOpt(type = OptType.Default)
     public int compareTo(Student std) {
         return this.name.compareTo(std.getName());
     }
