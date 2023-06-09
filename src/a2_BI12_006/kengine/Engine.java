@@ -167,13 +167,10 @@ public class Engine {
     }
     tt.addDoc(d);
 
-    if(this.q != null){
-      q.addDoc(d, wt.addDoc(d));
-    }
+    Hashtable hst = wt.addDoc(d);
 
-    if(this.q == null){
-      q = new Query();
-      q.addDoc(d, wt.addDoc(d));
+    if(this.q != null){
+      q.addDoc(d, hst);
     }
     return q;
   }

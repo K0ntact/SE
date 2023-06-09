@@ -108,13 +108,7 @@ public class PostgradStudent extends Student {
     // Default methods
     @Override
     public String toString() {
-        return "PostgradStudent{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", address='" + address + '\'' +
-                ", gpa=" + gpa +
-                '}';
+        return "PostgradStudent(" + id + ", " + name + ", " + phoneNumber + ", " + address + ", " + gpa + ')';
     }
 
     @Override

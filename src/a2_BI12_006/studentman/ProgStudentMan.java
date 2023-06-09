@@ -433,7 +433,7 @@ public class ProgStudentMan {
         String name = (String)data[1];
         String phone = (String)data[2];
         String address = (String)data[3];
-        Float gpa = (Float)data[4];
+        float gpa = (float)data[4];
 
         return new PostgradStudent(id, name, phone, address, gpa);
     }
