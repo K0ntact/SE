@@ -188,7 +188,7 @@ public class Student implements Comparable<Student>, Document{
     /**
      * @effects
      * <pre>
-     * return a string presentation of the student
+     * return a HTML string presentation of the student
      * </pre>
      */
     @Override
