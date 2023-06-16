@@ -69,10 +69,10 @@ public class PostgradStudent extends Student {
             throw new NotPossibleException("PostgradStudent: Invalid gpa");
         }
 
-        this.id = id;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
+        super.setId(id);
+        super.setName(name);
+        super.setPhoneNumber(phoneNumber);
+        super.setAddress(address);
         this.gpa = gpa;
     }
 
@@ -108,15 +108,15 @@ public class PostgradStudent extends Student {
     // Default methods
     @Override
     public String toString() {
-        return "PostgradStudent(" + id + ", " + name + ", " + phoneNumber + ", " + address + ", " + gpa + ')';
+        return "PostgradStudent(" + getId() + ", " + getName() + ", " + getPhoneNumber() + ", " + getAddress() + ", " + gpa + ')';
     }
 
     @Override
     public String toHtmlDoc() {
         return "<html>\n" +
-                "<head><title>PostgradStudent:" + id + "-" + name + "</title></head>\n" +
+                "<head><title>PostgradStudent:" + getId() + "-" + getName() + "</title></head>\n" +
                 "<body>\n" +
-                id + " " + name + " " + phoneNumber + " " + address + " " + gpa + "\n" +
+                getId() + " " + getName() + " " + getPhoneNumber() + " " + getAddress() + " " + gpa + "\n" +
                 "</body></html>";
     }
 

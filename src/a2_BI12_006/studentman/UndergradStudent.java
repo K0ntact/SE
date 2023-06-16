@@ -55,24 +55,24 @@ public class UndergradStudent extends Student {
             throw new NotPossibleException("UndergradStudent: Invalid address");
         }
 
-        this.id = id;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
+        super.setId(id);
+        super.setName(name);
+        super.setPhoneNumber(phoneNumber);
+        super.setAddress(address);
     }
 
     // Default methods
     @Override
     public String toString() {
-        return "UndergradStudent(" + id + ", " + name + ", " + phoneNumber + ", " + address + ")";
+        return "UndergradStudent(" + getId() + ", " + getName() + ", " + getPhoneNumber() + ", " + getAddress() + ")";
     }
 
     @Override
     public String toHtmlDoc() {
         return "<html>\n" +
-                "<head><title>UndergradStudent:" + id + "-" + name + "</title></head>\n" +
+                "<head><title>UndergradStudent:" + getId() + "-" + getName() + "</title></head>\n" +
                 "<body>\n" +
-                id + " " + name + " " + phoneNumber + " " + address + "\n" +
+                getId() + " " + getName() + " " + getPhoneNumber() + " " + getAddress() + "\n" +
                 "</body></html>";
     }
 

@@ -33,13 +33,13 @@ public class Student implements Comparable<Student>, Document{
     private static final int S_MAX_ADDRESS_LENGTH = 100;
 
     @DomainConstraint(type = "Integer", mutable = false, optional = false, min = S_MIN_ID, max = S_MAX_ID)
-    protected int id;
+    private int id;
     @DomainConstraint(type = "String", optional = false, length = S_MAX_NAME_LENGTH)
-    protected String name;
+    private String name;
     @DomainConstraint(type = "String", optional = false, length = S_MAX_PHONE_NUMBER_LENGTH)
-    protected String phoneNumber;
+    private String phoneNumber;
     @DomainConstraint(type = "String", optional = false, length = S_MAX_ADDRESS_LENGTH)
-    protected String address;
+    private String address;
 
     /**
      * Constructor
@@ -124,6 +124,26 @@ public class Student implements Comparable<Student>, Document{
      *      set this.id = id and return true
      * </pre>
      */
+    @DOpt(type = OptType.Mutator)   @AttrRef("id")
+    protected boolean setId(int id) {
+        if (!validateId(id)) {
+            return false;
+        } else {
+            this.id = id;
+            return true;
+        }
+    }
+
+
+    /**
+     * @effects
+     * <pre>
+     * if id is not valid
+     *      return false
+     * else
+     *      set this.id = id and return true
+     * </pre>
+     */
     @DOpt(type = OptType.Mutator)   @AttrRef("name")
     public boolean setName(String name) {
         if (!validateName(name)) {
@@ -197,7 +217,7 @@ public class Student implements Comparable<Student>, Document{
         return "<html>\n" +
                 "<head><title>Student:" + id + "-" + name + "</title></head>\n" +
                 "<body>\n" +
-                    id + " " + name + " " + phoneNumber + " " + address + "\n" +
+                id + " " + name + " " + phoneNumber + " " + address + "\n" +
                 "</body></html>";
     }
     /**
